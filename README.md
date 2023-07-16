@@ -4,6 +4,8 @@
 
 * GitHub
 
+* PicGo
+  
 * 七牛云CDN
 
 ## 预览
