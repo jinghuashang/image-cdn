@@ -54,6 +54,8 @@ jobs:
           rm -rf raw/*
           touch webp/.keep
           touch raw/.keep
+          ls -R  *.jpg > file.txt
+
           
       - name: Push
         run: |
