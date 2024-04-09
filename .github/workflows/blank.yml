@@ -38,10 +38,10 @@ jobs:
           
       # 发布 NPM 包
       # 自行修改为自己的Github邮箱地址和用户名
-      #- name: Publish Package
-        #run: |
-          #git config --global user.email "3415645010@qq.com"
-          #git config --global user.name "jinghuashang"
+      - name: Publish Package
+        run: |
+          git config --global user.email "3415645010@qq.com"
+          git config --global user.name "jinghuashang"
           #npm version patch
           #npm publish
         #env:
