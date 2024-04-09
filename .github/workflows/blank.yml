@@ -35,7 +35,6 @@ jobs:
           cwebp-batch --in raw --out webp -q 75 -quiet
           # npx webp-batch-convert --in raw --out webp -q 75 -quiet
           mv webp/*.webp imgs/
-          ls -R  imgs/*.jpg > file.txt
           
       # 发布 NPM 包
       # 自行修改为自己的Github邮箱地址和用户名
@@ -55,6 +54,11 @@ jobs:
           rm -rf raw/*
           touch webp/.keep
           touch raw/.keep
+
+      # 获取文件名字
+      - name: ls Files
+        run:  |
+          ls -R imgs/* > file.txt
 
           
       - name: Push
