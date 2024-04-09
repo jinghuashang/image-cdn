@@ -6,11 +6,7 @@
 
 * PicGo
   
-* 七牛云CDN
 
 ## 预览
-* **来自[花铭](https://www.pixiv.net/users/70483399)老师的图**
-![云兮-静立围栏的少女](http://cdn.chuqis.com/gh/jinghuashang/image-cdn/img/106763530_p1_master1200.jpg)
-* 压缩后的图
-![云兮-静立围栏的少女](http://cdn.chuqis.com/gh/jinghuashang/image-cdn/img/106763530_p1_master1200ys.jpg)
+![碧蓝航线]([http://cdn.chuqis.com/gh/jinghuashang/image-cdn/img/106763530_p1_master1200ys.jpg](https://cdn.cbd.int/jinghuashang-imgbed@0.0.1/imgs/wallhaven-vqx33l.webp))
 ## 
