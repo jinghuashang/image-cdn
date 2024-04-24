@@ -1,9 +1,15 @@
-name: Node.js Package
-# 监测图床分支，2020年10月后github新建仓库默认分支改为main，记得更改
+name: img2webp & Deploy
+#检测到分支变动就进行提交Actions，2020年10月后github新建仓库默认分支改为main，但是可以修改仓库的默认分支为master，修改方法请自行搜索
 on:
   push:
     branches:
       - main
+      # - main
+      # 注意若分支为main，则请修改后使用
+#    paths-ignore:
+#      - package.json
+
+  workflow_dispatch:
 
 jobs:
   publish-npm:
