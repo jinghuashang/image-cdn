@@ -44,9 +44,9 @@ jobs:
         run: |
           npm install -g webp-batch-convert@0.1.2
           # 要注意这里的版本号需要添加，如果不添加默认使用@Latest会出现问题
-          #cwebp-batch --in raw --out webp -q 75 -quiet
-          npx webp-batch-convert --in raw --out webp -q 75 -quiet
-          mv webp/*.webp imgs/
+          cwebp-batch --in raw --out webp -q 75 -quiet
+          #npx webp-batch-convert --in raw --out webp -q 75 -quiet
+          #mv webp/*.webp imgs/
 
       - run: npm publish
         env:
@@ -55,7 +55,7 @@ jobs:
      # 删除 raw/ 和 webp/ 下的所有文件
       - name: Delete Files
         run: |
-          rm -rf webp/*
+          #rm -rf webp/*
           rm -rf raw/*
           touch webp/.keep
           touch raw/.keep
