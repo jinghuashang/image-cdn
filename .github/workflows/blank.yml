@@ -42,10 +42,10 @@ jobs:
         run: |
           git config --global user.email "3415645010@qq.com"
           git config --global user.name "jinghuashang"
-          #npm version patch
-          #npm publish
-        #env:
-         # NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          npm version patch
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
           
       # 删除 raw/ 和 webp/ 下的所有文件
       - name: Delete Files
