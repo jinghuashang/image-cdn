@@ -23,6 +23,18 @@ jobs:
           # 要注意这里的版本号需要添加，如果不添加默认使用@Latest会出现问题
           cwebp-batch --in raw --out webp -q 75 -quiet
           # npx webp-batch-convert --in raw --out webp -q 75 -quiet
+
+          - name: Rename files
+      - name: Install & Convert
+        run: |
+          for file in webp/*; do
+            new_name=$(mktemp -u XXXXXXXXXX)
+            mv "$file" "$new_name"
+            echo "Renamed $file to$new_name"
+          done
+          
+      - name: Datale raw
+        run: |
           mv webp/*.webp imgs/
 
       - run: npm publish
