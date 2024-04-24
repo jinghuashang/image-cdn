@@ -72,7 +72,13 @@ jobs:
           echo "Old version: $version"
           echo "New version: $new_version"
       
-      - run: npm publish
+      # 发布 NPM 包
+      # 自行修改为自己的Github邮箱地址和用户名
+      - name: Publish Package
+        run: |
+          git config --global user.email "3415645010@qq.com"
+          git config --global user.name "jinghuashang"
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
           
