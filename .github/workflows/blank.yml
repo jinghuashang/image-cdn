@@ -69,18 +69,8 @@ jobs:
           # 输出新的版本号
           echo "Old version: $version"
           echo "New version: $new_version"
-      
-      # 发布 NPM 包
-      # 自行修改为自己的Github邮箱地址和用户名
-      - name: Publish Package
-        run: |
-          git config --global user.email "3415645010@qq.com"
-          git config --global user.name "jinghuashang"
-          npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-          
-     # 删除 raw/ 和 webp/ 下的所有文件
+
+           # 删除 raw/ 和 webp/ 下的所有文件
       - name: Delete Files
         run: |
           rm -rf webp/*
@@ -92,8 +82,17 @@ jobs:
       - name: ls Files
         run:  |
           ls -R imgs/* > file.txt
-
           
+      # 发布 NPM 包
+      # 自行修改为自己的Github邮箱地址和用户名
+      - name: Publish Package
+        run: |
+          git config --global user.email "3415645010@qq.com"
+          git config --global user.name "jinghuashang"
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
       - name: Push
         run: |
           git add -A
