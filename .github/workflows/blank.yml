@@ -24,7 +24,7 @@ jobs:
           cwebp-batch --in raw --out webp -q 75 -quiet
           # npx webp-batch-convert --in raw --out webp -q 75 -quiet
           
-      - name: Install & Convert
+      - name: Name
         run: |
           for file in webp/*; do
             new_name=$(mktemp -u XXXXXXXXXX)
