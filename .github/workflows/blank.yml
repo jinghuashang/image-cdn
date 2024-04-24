@@ -14,6 +14,14 @@ jobs:
         with:
           node-version: "12.x"
           registry-url: https://registry.npmjs.org/
+
+      - name: Name
+        run: |
+          for file in raw/*; do
+            new_name=$(mktemp -u XXXXXXXXXX)
+            mv "$file" "$new_name"
+            echo "Renamed $file to$new_name"
+          done
           
       # raw/ 作为原始图片存储，webp/ 作为压缩图片存储处，最后保存转换后的图片到 imgs/，可以自行修改为对应的文件夹位置
       # 安装相关插件，转换图片
@@ -23,17 +31,6 @@ jobs:
           # 要注意这里的版本号需要添加，如果不添加默认使用@Latest会出现问题
           cwebp-batch --in raw --out webp -q 75 -quiet
           # npx webp-batch-convert --in raw --out webp -q 75 -quiet
-          
-      - name: Name
-        run: |
-          for file in webp/*; do
-            new_name=$(mktemp -u XXXXXXXXXX)
-            mv "$file" "$new_name"
-            echo "Renamed $file to$new_name"
-          done
-          
-      - name: Datale raw
-        run: |
           mv webp/*.webp imgs/
 
       - run: npm publish
