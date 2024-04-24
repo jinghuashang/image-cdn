@@ -54,6 +54,33 @@ jobs:
           #npx webp-batch-convert --in raw --out webp -q 75 -quiet
           mv webp/*.webp imgs/
 
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Read package.json and bump version
+        id: bump-version
+        run: |
+          # 读取package.json文件
+          version=$(cat package.json | jq -r '.version')
+        
+          # 解析版本号并增加
+          IFS='.' read -ra VER <<< "$version"
+          ((VER[2]++))
+          new_version="${VER[0]}.${VER[1]}.${VER[2]}"
+        
+          # 输出新的版本号
+          echo "Old version: $version"
+          echo "New version: $new_version"
+        
+          # 将新的版本号输出，以便后续步骤使用
+          echo "::set-output name=new_version::$new_version"
+      
+      - name: Update package.json with new version
+        run: |
+          # 使用jq更新package.json中的版本号
+          jq ".version = \"$VERSION\"" package.json > temp.json && mv temp.json package.json
+          cat package.json
+      
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
