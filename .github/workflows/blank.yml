@@ -112,6 +112,7 @@ jobs:
       # 获取文件名字
       - name: ls Files
         run:  |
+          ls -R imgs/* sp/* > file.txt
           ls -R imgs/* > hp.txt
           ls -R sp/* > sp.txt
           
