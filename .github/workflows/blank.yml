@@ -19,7 +19,7 @@ jobs:
           node-version: "12.x"
           registry-url: https://registry.npmjs.org/
 
-      - name: Name
+      - name: hp
         run: |
           # 遍历指定目录中的每个文件
           for file in raw/*; do
@@ -41,6 +41,29 @@ jobs:
               echo "Renamed $file to$new_filename"
             fi
           done
+
+      - name: sp
+        run: |
+          # 遍历指定目录中的每个文件
+          for file in shupin/*; do
+          # 检查文件是否为普通文件（排除目录）
+              if [ -f "$file" ]; then
+              # 获取文件名（不包括路径）和扩展名
+              filename=$(basename "$file")
+              extension="${filename##*.}"
+              filename_without_extension="${filename%.*}"
+            
+              # 使用mktemp生成一个新的随机文件名（不包含扩展名）
+              new_name=$(mktemp -u XXXXXXXXXX)
+            
+              # 重建新的文件名，包括随机字符串和原始扩展名
+              new_filename="${new_name}.${extension}"
+              
+              # 重命名文件，保留原始扩展名
+              mv "$file" "shupin/$new_filename"
+              echo "Renamed $file to$new_filename"
+            fi
+          done
           
       # raw/ 作为原始图片存储，webp/ 作为压缩图片存储处，最后保存转换后的图片到 imgs/，可以自行修改为对应的文件夹位置
       # 安装相关插件，转换图片
@@ -48,9 +71,12 @@ jobs:
         run: |
           npm install -g webp-batch-convert@0.1.2
           # 要注意这里的版本号需要添加，如果不添加默认使用@Latest会出现问题
+          # 横屏文件
           cwebp-batch --in raw --out webp -q 75 -quiet
-          #npx webp-batch-convert --in raw --out webp -q 75 -quiet
           mv webp/*.webp imgs/
+          # 竖屏文件
+          cwebp-batch --in shupin --out webp-sp -q 75 -quiet
+          mv webp-sp/*.webp sp/
 
       - name: Read package.json and bump version
         id: bump-version
@@ -75,13 +101,18 @@ jobs:
         run: |
           rm -rf webp/*
           rm -rf raw/*
+          rm -rf shupin/*
+          rm -rf webp-sp/*
           touch webp/.keep
           touch raw/.keep
+          touch sp/.keep
+          touch webp-sp/.keep
 
       # 获取文件名字
       - name: ls Files
         run:  |
-          ls -R imgs/* > file.txt
+          ls -R imgs/* > hp.txt
+          ls -R sp/* > sp.txt
           
       # 发布 NPM 包
       # 自行修改为自己的Github邮箱地址和用户名
