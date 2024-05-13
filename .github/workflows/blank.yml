@@ -107,6 +107,7 @@ jobs:
           touch raw/.keep
           touch sp/.keep
           touch webp-sp/.keep
+          touch shupin/.keep
 
       # 获取文件名字
       - name: ls Files
