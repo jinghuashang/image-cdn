@@ -105,7 +105,6 @@ jobs:
           rm -rf webp-sp/*
           touch webp/.keep
           touch raw/.keep
-          touch sp/.keep
           touch webp-sp/.keep
           touch shupin/.keep
 
